@@ -1,0 +1,144 @@
+<?php
+   /**
+    * The template for displaying Archive pages.
+    *
+    * Learn more: http://codex.wordpress.org/Template_Hierarchy
+    *
+    * @package Dokan
+    * @subpackage WooCommerce/Templates
+    * @version 2.0.0
+    */
+   get_header();
+?>
+</div>
+</div>
+<div id="skrollr-body">
+    <div class="slider-shop" data-0="background-position:0px -30px" data-500="background-position:0px 200px;">
+        <div class="overlay">
+            <div class="shop-slider col-md-8">
+                <ul class="slides">
+                    <?php
+                       $featured_query = dokan_get_featured_products();
+                    ?>
+                    <?php
+                       while ($featured_query->have_posts()) : $featured_query->the_post();
+                           if (has_post_thumbnail($post->ID)) {
+                               ?>
+                               <li>
+                                   <a href="<?php echo get_permalink($post->ID) ?>" title="<?php echo esc_attr($post->post_title ? $post->post_title : $post->ID); ?>">
+                                       <span class="content">
+                                           <div class="title">
+                                               <h1>
+                                                   <?php the_title(); ?>
+                                               </h1>
+                                           </div>
+                                           <div class="description">
+                                               <h2>
+                                                   <?php echo apply_filters('woocommerce_short_description', $post->post_excerpt) ?>
+                                               </h2>
+                                           </div>
+                                       </span>
+                                       <span class="image">
+                                           <?php echo get_the_post_thumbnail($post->ID, array(460, 329)); ?>
+                                       </span>
+                                   </a>
+                               </li>
+                               <?php
+                           }
+                       endwhile;
+                    ?>
+                </ul>
+            </div>
+        </div> <!-- .slider-container -->
+    </div>
+</div>
+</div>
+<div id="primary" class="home-content-area clearfix">
+    <!--   <div class="cat_header">
+           <ul class="cat_list">
+               <li class="<?php if (is_shop()) echo "current-cat"; ?>"><a href="<?php echo get_permalink(woocommerce_get_page_id('shop')); ?>"><?php _e('All Deals'); ?> </a></li>
+    <?php wp_list_categories('show_option_all=&depth=1 &taxonomy=product_cat&title_li='); ?>
+           </ul>
+       </div> -->
+    <div id="primary" class="content-area col-md-8">
+        <div id="content" class="site-content" role="main">
+            <?php
+               /**
+                * woocommerce_before_main_content hook
+                *
+                * @hooked woocommerce_output_content_wrapper - 10 (outputs opening divs for the content)
+                * @hooked woocommerce_breadcrumb - 20
+                */
+            ?>
+            <div class="archive-header clearfix">
+                <?php if (apply_filters('woocommerce_show_page_title', true)) : ?>
+                       <h1 class="page-title"><?php woocommerce_page_title(); ?></h1>
+                   <?php endif; ?>
+                       
+                       
+                       <div class="dropdown archive-filter">
+  
+                       <a class=" dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars fa-2x"></i></a>
+                        <ul class="dropdown-menu pull-right">
+        <li>
+     dasgfasdg
+        </li>
+                        </ul></div>
+            </div>
+            <?php 
+               global $wp_query, $woocommerce_loop;
+               if (have_posts()) : ?>
+                   <?php woocommerce_product_loop_start(); ?>
+                   <?php woocommerce_product_subcategories(); 
+                   	$total = $wp_query->found_posts;
+                        $pageno = (get_query_var('paged')) ? get_query_var('paged') : 1;
+                        $ppp = get_query_var('posts_per_page');
+                        $offset = ($pageno * $ppp) - $ppp;
+                        $pageitems=$total-$offset;
+                        $columns=$woocommerce_loop['columns'] ? $woocommerce_loop['columns']:3;
+                        $count=0;
+                   ?>
+                   <?php while (have_posts()) : 
+                       the_post();
+                   if($pageitems < $ppp)                                        //if page items is less than posts per page i.e valid only on last page
+                   {
+                       if(($pageitems) % $columns !=0)                          //if page items are not a multiple of no. of columns (3)
+                       { 
+                           if(($pageitems)<$columns)                                  //if they are less than no.of columns (3) i.e 1 or 2 then no need to display both
+                           {
+                               break;
+                               
+                           }
+                           else if(++$count<=(($pageitems)-(($pageitems) % $columns)))  // if more than no. of columns ...count ++ <= 4 - 1 i.e 3... display to fill 3 columns (first row)
+                           {
+                               wc_get_template_part('content', 'product');
+                           }
+                       }
+                   }
+                       else
+                           wc_get_template_part('content', 'product');
+                   
+                      endwhile; // end of the loop.   ?>
+                   <?php woocommerce_product_loop_end(); ?>
+                   <?php
+                   /**
+                    * woocommerce_after_shop_loop hook
+                    *
+                    * @hooked woocommerce_pagination - 10
+                    */
+                   do_action('woocommerce_after_shop_loop');
+                   ?>
+               <?php elseif (!woocommerce_product_subcategories(array('before' => woocommerce_product_loop_start(false), 'after' => woocommerce_product_loop_end(false)))) : ?>
+                   <?php wc_get_template('loop/no-products-found.php'); ?>
+               <?php endif; ?>
+            <?php
+               /**
+                * woocommerce_after_main_content hook
+                *
+                * @hooked woocommerce_output_content_wrapper_end - 10 (outputs closing divs for the content)
+                */
+               do_action('woocommerce_after_main_content');
+            ?>
+        </div><!-- #content .site-content -->
+    </div><!-- #primary .content-area -->
+    <?php get_footer(); ?>

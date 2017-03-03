@@ -1,0 +1,62 @@
+/*
+Theme Name: Hybrid
+Description: The bootstrap theme
+Version: 3.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+*/
+
+
+@import url('css/icomoon-social.css');
+@import url('css/bootstrap.min.css');
+@import url('css/bootstrap-theme.css');
+@import url('http://fonts.googleapis.com/css?family=Open+Sans:400,700,600,800');
+@import url('css/leaflet.css');
+@import url('css/leaflet.ie.css');
+@import url('css/main.css');
+@import url('css/slicknav.css');
+
+
+
+/* 
+------------------------------------------------------------
+For Sale Bubble
+------------------------------------------------------------
+*/
+
+.bubble {
+left: 0px;
+position: absolute;
+text-transform: uppercase;
+top: 20px;
+z-index: 9;
+}
+ 
+.bubble .inside {
+background-color: #e74c3c;
+border-radius: 999px;
+display: table;
+height: 42px;
+position: relative;
+width: 42px;
+-webkit-border-radius: 999px;
+}
+ 
+.bubble .inside .inside-text {
+color: #fff;
+display: table-cell;
+font-size: 14px;
+font-weight: bold;
+line-height: 14px;
+text-align: center;
+vertical-align: middle;
+}
+
+/*
+---------------------------------------------------------------
+*/
+
+
+
+
+

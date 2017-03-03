@@ -1,0 +1,15 @@
+array (
+  'as-background' => '',
+  'as-caption-position' => 'left',
+  'as-button' => '',
+  'as-caption-style' => 'light',
+  'as-link' => '',
+  'as-button-in-animation' => 'bounceInUp',
+  'as-button-out-animation' => 'fadeOutUpBig',
+  'as-caption-in-animation' => 'flash',
+  'as-caption-out-animation' => 'fadeOutUp',
+  'as-content-in-animation' => 'shake',
+  'as-content-out-animation' => 'fadeOutDownBig',
+  'as-image-in-animation' => 'fadeIn',
+  'as-image-out-animation' => 'flip',
+)

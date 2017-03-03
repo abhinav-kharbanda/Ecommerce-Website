@@ -1,0 +1,37 @@
+.cgd_eer_verified {
+	color: #008000;
+}
+
+.eer-feedback {
+	background: #eee;
+	padding: 10px;
+	font-size: 14px;
+}
+
+.eer-feedback p {
+	margin-bottom: 10px;
+}
+
+.eer-feedback-intro {
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.eer-feedback-button {
+	background: #999;
+	color: #fff;
+	margin-right: 10px;
+	padding: 4px 6px;
+}
+
+.eer-feedback-button:hover {
+	color: #333;
+}
+
+.comment.depth-2 .cgd_eer_verified, .comment.depth-2 .eer-feedback {
+	display: none;
+} 
+
+.comment.eer-review .comment-reply {
+	display: none;
+}
